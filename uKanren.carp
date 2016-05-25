@@ -1,0 +1,14 @@
+(defn variable [x] [x])
+(defn variable? [x] (and (array? x)))
+
+(defn lookup [x bindings]
+  (if-let [l (get-maybe bindings x)]
+    (if (variable? l)
+      (lookup l)
+      l)
+    :fail))
+
+(defn extend [key val bindings]
+  (assoc bindings key val))
+
+(defn unit [sc] )
